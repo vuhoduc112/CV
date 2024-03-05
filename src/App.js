@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { AppProvider, ButtonGroup, Button } from '@shopify/polaris';
+import "@shopify/polaris/build/esm/styles.css";
+import FormOne from './formOne';
+import FormThree from './formThree/formThree';
+import React, { useState } from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [currentForm, setCurrentForm] = useState(null);
+
+    return (
+        <AppProvider>
+            <div className="App">
+              <h1>Create volume discount</h1>
+                <ButtonGroup segmented>
+                    <Button onClick={() => setCurrentForm('FormOne')}>General</Button>
+                    <Button onClick={() => setCurrentForm('FormThree')}>Volume discount rule</Button>
+                </ButtonGroup>
+                {currentForm === 'FormOne' && <FormOne />}
+                {currentForm === 'FormThree' && <FormThree />}
+            </div>
+        </AppProvider>
+    );
 }
 
 export default App;
