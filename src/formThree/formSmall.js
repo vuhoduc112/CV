@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { TextField, Select } from '@shopify/polaris';
+import { TextField, Select, Layout } from '@shopify/polaris';
+import './formSmall.css'
 
 const FormSmall = ({ onSubmit }) => {
     const [selected, setSelected] = useState('None');
-
     const {
         handleSubmit,
         control,
         watch,
         formState: { errors },
-    } = useForm();
+    } = useForm({
+        defaultValues: {
+            DiscountType: 'None',
+        },
+    });
 
     const options = [
         { label: 'None', value: 'None' },
@@ -25,9 +29,9 @@ const FormSmall = ({ onSubmit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit(formSubmit)} style={{ height: '400px' }}>
-            <div>
-                <div>
+        <form onSubmit={handleSubmit(formSubmit)} style={{ height: '300px' }}>
+            <Layout>
+                <Layout.Section oneHalf>
                     <Controller
                         control={control}
                         name="Title"
@@ -57,19 +61,24 @@ const FormSmall = ({ onSubmit }) => {
                             <TextField label="Label (optional)" value={field.value} onChange={field.onChange} />
                         )}
                     />
+                </Layout.Section>
+                <Layout.Section oneHalf>
                     <Controller
                         control={control}
                         name="quantity"
-                        rules={{ required: 'Không được để trống ô quantity',  pattern: {
-                            value: /^[0-9]*$/,
-                            message: 'Chỉ được nhập số',
-                        } }}
+                        rules={{
+                            required: 'Không được để trống ô quantity',
+                            pattern: {
+                                value: /^[0-9]*$/,
+                                message: 'Chỉ được nhập số',
+                            },
+                        }}
                         render={({ field }) => (
                             <TextField
                                 label="Quantity"
                                 value={field.value}
                                 onChange={field.onChange}
-                                error={errors.Quantity && errors.Quantity.message}
+                                error={errors.quantity && errors.quantity.message}
                             />
                         )}
                     />
@@ -94,10 +103,13 @@ const FormSmall = ({ onSubmit }) => {
                         <Controller
                             control={control}
                             name="amount"
-                            rules={{ required: 'Không được để trống ô amount',  pattern: {
-                                value: /^[0-9]*$/,
-                                message: 'Chỉ được nhập số',
-                            }, }}
+                            rules={{
+                                required: 'Không được để trống ô amount',
+                                pattern: {
+                                    value: /^[0-9]*$/,
+                                    message: 'Chỉ được nhập số',
+                                },
+                            }}
                             render={({ field }) => (
                                 <TextField
                                     label="amount"
@@ -109,9 +121,23 @@ const FormSmall = ({ onSubmit }) => {
                             )}
                         />
                     )}
-                </div>
-            </div>
-            <button type="submit" style={{marginTop: '50px', width: '100%', backgroundColor: 'green', color: '#fff', padding: '8px', border: 'none', borderRadius: '8px', cursor: 'pointer'}}>Save</button>
+                </Layout.Section>
+            </Layout>
+            <button
+                type="submit"
+                style={{
+                    marginTop: '50px',
+                    width: '100%',
+                    backgroundColor: 'green',
+                    color: '#fff',
+                    padding: '8px',
+                    border: 'none',
+                    borderRadius: '8px',
+                    cursor: 'pointer',
+                }}
+            >
+                Save
+            </button>
         </form>
     );
 };

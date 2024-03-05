@@ -9,10 +9,12 @@ const FormThree = () => {
 
     const addForm = () => {
         setFormCount(formCount + 1);
+        setFormValues([])
     };
 
     const deleteForm = (index) => () => {
         setFormCount(formCount - 1);
+        setFormValues([])
     };
 
     const [formValues, setFormValues] = useState([]);
@@ -41,30 +43,31 @@ const FormThree = () => {
                             <Icon source={DeleteIcon} />
                         </div>
                         <FormSmall onSubmit={addFormValue} />
-                        <button
-                            style={{
-                                display: 'flex',
-                                margin: '20px 0',
-                                width: '100%',
-                                backgroundColor: 'orangered',
-                                color: '#fff',
-                                padding: '8px',
-                                border: 'none',
-                                borderRadius: '8px',
-                                cursor: 'pointer',
-                                justifyContent: 'center',
-                                alignItems: 'center'
-                            }}
-                            onClick={addForm}
-                        >
-                            <div>
-                                <Icon source={PlusCircleIcon} />
-                            </div>{' '}
-                            <div>ADD option</div>
-                        </button>
                     </div>
                 ))}
+                <button
+                    style={{
+                        display: 'flex',
+                        margin: '20px 0',
+                        width: '100%',
+                        backgroundColor: 'orangered',
+                        color: '#fff',
+                        padding: '8px',
+                        border: 'none',
+                        borderRadius: '8px',
+                        cursor: 'pointer',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                    onClick={addForm}
+                >
+                    <div>
+                        <Icon source={PlusCircleIcon} />
+                    </div>{' '}
+                    <div>ADD option</div>
+                </button>
             </div>
+
             <div>
                 <FormTwo formValues={formValues} />
             </div>

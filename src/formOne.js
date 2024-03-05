@@ -34,6 +34,7 @@ const FormOne = () => {
                         value={field.value}
                         onChange={field.onChange}
                         error={errors.campaign && errors.campaign.message}
+                        placeholder='Volume discount #2'
                     />
                 )}
             />
@@ -45,6 +46,7 @@ const FormOne = () => {
                         label="Title"
                         value={field.value}
                         onChange={field.onChange}
+                        placeholder='Buy more and save'
                     />
                 )}
             />
@@ -56,6 +58,7 @@ const FormOne = () => {
                         label="Description"
                         value={field.value}
                         onChange={field.onChange}
+                        placeholder='Apply for all products in store'
                     />
                 )}
             />
